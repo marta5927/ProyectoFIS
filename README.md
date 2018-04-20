@@ -19,6 +19,12 @@ Planteamiento
 ----------------------
 De momento, se plantea utilizar las herramientas de C++ y el modelo cliente-servidor
 
+TUTORIALS ON POINT
+----------------------
+<[Github y contribuciones](https://github.com/LuchoCastillo/Conociendo-GitHub/tree/master/tutorial/data)
+
+<[Edicion de archivos tipo README en git](https://github.com/ricval/Documentacion/blob/master/Guias/GitHub/mastering-markdown.md)
+
 Conocimientos de programación del equipo:
 -----------------------------------------
   - C++
