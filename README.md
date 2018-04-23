@@ -13,6 +13,7 @@ Grupo de Trabajo:
   - Marta García Luis
   - Sonia Díaz Santos
   - Alejandro González González
+  - Aitor Hernández Sánchez
   - Fernando González Petit
   
 Planteamiento
