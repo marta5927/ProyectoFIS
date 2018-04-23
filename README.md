@@ -1,6 +1,7 @@
 # ProyectoFIS
 ---------------
 Proyecto Grupo M02 de la Asignatura de Fundamentos de Ingeniería de Software de la ULL
+# TODOS LOS CAMBIOS QUE SE HAGAN A PARTIR DE AHORA EN EL PROYECTO DEBEN SER SUPERVISADOS, LEER LA GUÍA
 
 Producto:
 ---------
