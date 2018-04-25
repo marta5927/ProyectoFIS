@@ -35,11 +35,4 @@ Conocimientos de programación del equipo:
   
 TAREAS:(por orden)
 --------------------------
-
-*Darse de alta como colaboradores*
-
-*Subir un modelo más formalizado del proyecto (la pizarrita)*
-
-*Subir estructura de clases*
-
-*Empezar con los .h del proyecto*
+Empezado el sistema de Proyecto que ofrece Github. Mucho más visual que ir retocando un fichero de texto.
