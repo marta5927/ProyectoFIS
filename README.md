@@ -37,9 +37,9 @@ TAREAS:(por orden)
 --------------------------
 Empezado el sistema de Proyecto que ofrece Github. Mucho más visual que ir retocando un fichero de texto.
 
-- Base de datos General e Histórico (History)
-- Gestión de Perfiles y Bases de Datos Propias(Profile)
-- Gestión de Control de Servidor (main/Server-Controller)
-- Gestión de Control de Cliente (main/Client-Controller)
-- Base de Datos de Cliente  (Caché del modo Cliente)
+- Base de datos General e Histórico (History) ->
+- Gestión de Perfiles y Bases de Datos Propias(Profile) -> Alejandro
+- Gestión de Control de Servidor (main/Server-Controller) -> Fernando
+- Gestión de Control de Cliente (main/Client-Controller) -> Marta
+- Base de Datos de Cliente  (Caché del modo Cliente) -> 
 
