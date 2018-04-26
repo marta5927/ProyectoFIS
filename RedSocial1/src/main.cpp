@@ -1,16 +1,24 @@
-#include "../include/servercontroller.h"
-
-using namespace FIS;
+#include "../include/message.h"
 
 int main(int argc, char* argv[]){
 
-    std::string port_opt, ip_addr, n_user;
-    bool help_opt, serv_opt;
+    FIS::Message msg;
+    const int SERVER_PORT = 7777;
+    sockaddr_in my_addr{};
 
-    procesamiento_de_opciones(help_opt, serv_opt, port_opt, ip_addr, n_user, argc, argv);
+    try{
+        my_addr = FIS::make_ip_address("", SERVER_PORT);     //MAKE_IP_ADDR usará INADDR_ANY -> Acepta conexiones a cualquier IP del server
+        std::atomic<bool> quit(false);
 
+        FIS::Socket servSocket(my_addr);
 
-
+    }catch(std::system_error& e){
+        std::cerr << program_invocation_name << ": " << e.what() << '\n';
+        return 6;
+    }
+    catch(int e){
+        std::cerr << "Error " << e << ": problemilla\n";
+    }
 
     return 0;
 }

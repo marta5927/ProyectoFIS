@@ -1,6 +1,8 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
+#include <cxxabi.h>
+#include <getopt.h>             //Command line opt
 #include <iostream>
 #include <string>               //String
 #include <sys/socket.h>         //Unix sockets
@@ -24,8 +26,8 @@
 
 namespace FIS{
 
-//Hacerlo un struct facilita el acceso desde otras clases a los campos del mensaje
-//Sujeto a cambios de ser necesario****
+sockaddr_in make_ip_address(std::string ip_address, int port);
+void procesamiento_de_opciones(bool& help_option, std::string& port_option, int argc, char* argv[]);
 struct Message{
 
     Message() {}
@@ -38,27 +40,21 @@ struct Message{
     //Campos para MG, RT y Comments ... FUTURA IMPLEMENTACION
 };
 
-/**
- * @brief The Socket class, thought to contain socket usage methods (UDP protocol)
- *          Totalmente original y para nada reutilizada
- */
-
 class Socket
 {
     int fd_;        //FILE DESCRIPTOR
     int result_;    //BIND RESULT
 
 public:
-    Socket(const sockaddr_in& address);     ///<@brief Constructor
-    ~Socket();                              ///<@brief Destructor by default. Closes socket file
+    Socket(const sockaddr_in& address);
+    ~Socket();
 
-    int get_fd(){ return fd_; }             ///<@brief Getter for file descriptor
-    int get_result(){ return result_; }     ///<@brief Getter for bind result
+    int get_fd(){ return fd_; }
+    int get_result(){ return result_; }
 
     void send_to(const Message& message, const sockaddr_in& remote_address);    ///<@brief Sends message to a certain address
     void recieve_from(int fd, Message& message, sockaddr_in& address);          ///<@brief Recieves message from a certain address
-//private:
-  //  sockaddr_in make_ip_address(const std::string& ip_address, int port);
+
 };
 
 }
