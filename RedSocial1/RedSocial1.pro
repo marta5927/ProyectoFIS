@@ -3,7 +3,8 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += src/main.cpp
+SOURCES += src/main.cpp \
+           src/message.cpp
 
 HEADERS += \
     include/servercontroller.h \
