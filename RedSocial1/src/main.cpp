@@ -1,4 +1,4 @@
-#include "../include/message.h"
+#include "../include/servercontroller.h"
 
 int main(int argc, char* argv[]){
 
@@ -10,7 +10,7 @@ int main(int argc, char* argv[]){
         my_addr = FIS::make_ip_address("", SERVER_PORT);     //MAKE_IP_ADDR usará INADDR_ANY -> Acepta conexiones a cualquier IP del server
         std::atomic<bool> quit(false);
 
-        FIS::Socket servSocket(my_addr);
+        FIS::ServerController server(my_addr);
 
     }catch(std::system_error& e){
         std::cerr << program_invocation_name << ": " << e.what() << '\n';

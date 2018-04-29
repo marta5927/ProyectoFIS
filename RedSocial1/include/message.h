@@ -46,6 +46,7 @@ class Socket
     int result_;    //BIND RESULT
 
 public:
+    Socket();
     Socket(const sockaddr_in& address);
     ~Socket();
 

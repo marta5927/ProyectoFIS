@@ -4,7 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += src/main.cpp \
-           src/message.cpp
+           src/message.cpp \
+    src/servercontroller.cpp
 
 HEADERS += \
     include/servercontroller.h \

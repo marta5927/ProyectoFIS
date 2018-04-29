@@ -86,6 +86,8 @@ Socket::Socket(const sockaddr_in& address){
     }
 }
 
+Socket::Socket(){}
+
 Socket::~Socket(){
     close(fd_);
 }
