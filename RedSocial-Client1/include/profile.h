@@ -1,6 +1,8 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
+#include "socket.h"
+
 namespace FIS{
 
 struct InfoUser{
@@ -12,6 +14,12 @@ struct InfoUser{
 
 };
 
+struct User
+{
+    std::string name;
+    std::string passwd;
+
+};
 class Profile{
 private:
     InfoUser data_;
