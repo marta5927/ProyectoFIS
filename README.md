@@ -47,7 +47,9 @@ Tiempo requerido individualmente para la realización de la primera entrega 0.
 **----------------------**
 
 C++
+
 Java
+
 (?)
 
 
