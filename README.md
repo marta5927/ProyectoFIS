@@ -57,7 +57,11 @@ Java
 
 Para la primera entrega nos hubiera gustado que el usuario se pudiera crear la cuenta y haber implementado el envío del mensaje, pero no ha sido posible llegar a nuestro primer objetivo.
 
-## TUTORIALS ON POINT
+
+**----------------------**
+**TUTORIALS ON POINT**
+**----------------------**
+
 <Github y contribuciones
 
 <Edicion de archivos tipo README en git
@@ -71,14 +75,6 @@ Empezado el sistema de Proyecto que ofrece Github. Mucho más visual que ir reto
 - Proceso de login (Crossplatform) -> Alejandro 
 
 Tiempo requerido individualmente para la realización de la primera entrega 0.
-
-**----------------------**
-**CONOCIMIENTOS DE PROGRAMACIÓN DEL EQUIPO**
-**----------------------**
-
-  - C++
-  - Java
-  - (?)
   
 **----------------------**
 **REQUISITOS DE SOFTWARE**
