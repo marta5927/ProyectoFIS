@@ -1,11 +1,11 @@
-#include "/home/marta/Descargas/ProyectoFIS-master/RedSocial-Client1/include/clientcontroller.h"
-#include "/home/marta/Descargas/ProyectoFIS-master/RedSocial-Client1/include/profile.h"
+#include "../include/clientcontroller.h"
+#include "../include/profile.h"
+#include "../include/socket.h"
 
-using namespace FIS;
 
+sockaddr_in ClientController::make_ip_address(const std::string& ip_address, int port){
 
-sockaddr_in make_ip_address(const std::string& ip_address, int port){
-
+    std::cout << " puerto " << port << std::endl;
     sockaddr_in aux{};
     aux.sin_family = AF_INET;
 
@@ -24,103 +24,34 @@ sockaddr_in make_ip_address(const std::string& ip_address, int port){
 
 }
 
-
-
-
-void procesamiento_de_opciones(sockaddr_in &dir_servidor, sockaddr_in &dir_cliente, int argc, char* argv[]){
-
-
-    bool help_option = false;
-    std::string ip_addr;
-    std::string port_opcion;
-    static struct option long_options[] ={
-          {"help",      no_argument,       0, 'h'},
-          {"client",  required_argument, 0, 'c'},
-          {"port",      required_argument, 0, 'p'},
-          {0, 0, 0}
-    };
-
-
-    int option_index = 0;
-    int c;
-    while ( (c = getopt_long(argc, argv, "hc:p:", long_options, &option_index)) != -1) {
-        switch (c) {
-
-        case 'h':
-            help_option = true;
-            break;
-
-        case 'c':
-             std::printf("opción c con valor '%s'\n", optarg);
-             ip_addr = std::string(optarg);
-             break;
-
-        case 'p':       //opcion guardada en optarg
-            std::printf("opción p con valor '%s'\n", optarg);
-            port_option = std::string(optarg);
-            break;
-
-        case '?':
-            help_option = true;//Error message already sent
-            break;
-        default:
-            std::fprintf(stderr, "?? getopt devolvió código "
-                    "de error 0%o ??\n", c);
-            break;
-        }
-    }
-    if (optind < argc) {
-        std::cout << "-- argumentos no opción --\n";
-        for (; optind < argc; ++optind) {
-            std::cout << "argv[" << optind << "]: " <<
-            argv[optind] << '\n';
-        }
-    }
-
-
-    if(help_option)
-        std::cout << "Usage: [-c|--client client_ip] [-p|--port server_port] client\n";
-
-        int port;
-        std::string remote = "";
-        sockaddr_in dir_servidor{};
-        sockaddr_in dir_cliente{};
-
-        if (port_option.size() != 0)
-            port = std::stoi(port_option); //stoi(string ) convierte en int
-
-            dir_servidor = make_ip_address("127.0.0.1", 0);
-            dir_cliente = make_ip_address(ip_addr, port);
-
-
-}
-
-
-ClientController::ClientController(){}
-
-ClientController::ClientController(sockaddr_in dir_servidor_,
-                                   sockaddr_in dir_cliente_): ClientProfile_(),
-                                                              socket_(dir_servidor_),
-                                                             dir_servidor(dir_servidor_),
-                                                             dir_cliente(dir_cliente_)
+ClientController::ClientController(std::string ip_server)
 {
 
+    dir_cliente = make_ip_address("", 7777);
+    dir_servidor = make_ip_address(ip_server, 7777);
+    Socket _socket_(dir_cliente);
+    socket_ = _socket_;
 
 }
+ClientController::~ClientController(){}
 
 void ClientController::UserSend(std::atomic<bool> &quit ){
 
+    Message message;
+    std::string message_text;
     while(!quit){
-        std::string message_test;
-        std::getline(std::cin, message_test);
+        message_text.clear();
+        memset(message.text,'\0',strlen(message.text));
+        std::cout << ">" ;
+        std::getline(std::cin, message_text);
 
-        if(message_test == "/quit")
+        if(message_text == "/quit")
             quit = true;
         else{
+            message_text.copy(message.text,sizeof(message.text)-1,0);
 
-            FIS2::Message message;
-            strcpy(message.text, message_test.c_str());
-            message.text[280] = '\0';
+//            strcpy(message.text, message_text.c_str());
+//            message.text[280] = '\0';
 
             socket_.send_to(message, dir_servidor);
         }
@@ -128,14 +59,39 @@ void ClientController::UserSend(std::atomic<bool> &quit ){
     }
 }
 
-int ClientController::ControlLogin(const User& usu){
+void ClientController::UserRecieve(std::atomic<bool>& quit){
+    
+    Message message;
+    
+    while(!quit){
+        socket_.recieve_from(message,dir_servidor);
+        
+        if(message.text[0] != '\0'){
+            
+               // Mostrar el mensaje recibido en la terminal
+ /*   */           char* remote_ip = inet_ntoa(dir_servidor.sin_addr);
+              int remote_port = ntohs(dir_servidor.sin_port);
+         message.text[280] = '\0';
+          std::cout << "\n"
+                    << "\nUsuario " << message.username
+                   // << "\nHora: " << message.tiempo
+                    << "\nDireccion " << remote_ip << ":" << remote_port
+                    << "\nMensaje '" << message.text << "'\n";
 
-    socket_.send_usu(usu, dir_servidor);
+        
+        }
+        
+   }
+}
 
-    std::string confir = "";
+int ClientController::ControlLogin(const InfoUser& usu){
+
+    socket_.send_infoUser(usu, dir_servidor);
+
+    bool confir;
     socket_.recieve_confir(confir, dir_servidor);
 
-    if(!confir.empty())
+    if(confir)
         return 0;
     return -1;
 }
@@ -145,10 +101,10 @@ int ClientController::CrearCuenta(const InfoUser& info){
 
     socket_.send_infoUser(info, dir_servidor);
 
-    std::string confir = "";
+    bool confir;
     socket_.recieve_confir(confir, dir_servidor);
 
-    if(!confir.empty())
+    if(confir)
         return 0;
     return -1;
 
