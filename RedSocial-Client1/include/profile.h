@@ -2,31 +2,15 @@
 #define PROFILE_H
 
 #include "socket.h"
+/*
 
-namespace FIS{
-
-struct InfoUser{
-    std::string name;     //Nombre comun de usuario
-    std::string passwd;   //Contraseña -> El cifrado y los asuntos de seguridad los dejaría para más adelante
-    int edad;             //Duh
-
-    //...    Por si falta algo necesario
-
-};
-
-struct User
-{
-    std::string name;
-    std::string passwd;
-
-};
 class Profile{
 private:
     InfoUser data_;
 
     int TLFD_;          //TimeLine file descriptor, porque somos bilingües
         //La idea es que almacene los identificadores de los mensajes propios
-    std::vector<FIS::Message> MensajesUsu_;
+    std::vector<Message> MensajesUsu_;
 
 public:
     Profile();          //Recibir -> Datos de usuario, se le solicitan al crear la cuenta
@@ -41,6 +25,5 @@ public:
 
 };
 
-}
-
+*/
 #endif // PROFILE_H
